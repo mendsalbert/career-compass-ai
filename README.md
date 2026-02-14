@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Career Compass AI
 
-## Getting Started
+![Career Compass AI Banner](public/cca.jpg)
 
-First, run the development server:
+Career Compass AI is an AI-powered career planning app that helps users create and execute a personalized 12-month growth roadmap.
+
+Users can:
+- complete onboarding with their current role, target role, and constraints
+- generate a month-by-month plan with actionable tasks
+- track progress across themes and tasks
+- chat with an AI assistant ("Jake") for contextual guidance
+- persist their journey data in MongoDB under authenticated Clerk users
+
+## Tech Stack
+
+- **Frontend:** Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS
+- **Auth:** Clerk (`@clerk/nextjs`)
+- **AI:** Google Gemini (`@google/genai`)
+- **Database:** MongoDB Atlas (`mongodb` Node driver)
+- **Icons/UI:** Lucide React
+
+## Project Structure
+
+- `app/page.tsx` - main UI and client-side state flow
+- `app/api/plan/route.ts` - AI plan generation API
+- `app/api/chat/route.ts` - AI chat API for Jake
+- `app/api/state/route.ts` - load/save user state in MongoDB
+- `app/layout.tsx` - app shell and Clerk provider
+- `middleware.ts` - Clerk middleware protection
+- `lib/mongodb.ts` - MongoDB connection helper
+
+## Environment Variables
+
+Create a `.env.local` file in the project root:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+GEMINI_API_KEY=your_gemini_api_key
+MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/?appName=Cluster0
+MONGODB_DB_NAME=career_compass_ai
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+> Clerk is configured for keyless development mode by default, so you can start without manually adding Clerk keys.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Run Locally
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm install
+npm run dev
+```
 
-## Learn More
+Open `http://localhost:3000`.
 
-To learn more about Next.js, take a look at the following resources:
+## Core Features
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **Onboarding + Plan Generation**
+   - collects user context
+   - generates a 12-month roadmap with monthly themes and tasks
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2. **Progress Tracking**
+   - task status lifecycle: not started → in progress → complete
+   - month and overall progress percentages
 
-## Deploy on Vercel
+3. **AI Career Chat**
+   - grounded responses using profile + plan + selected month context
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. **Authenticated Persistence**
+   - each signed-in Clerk user gets their own saved app state in MongoDB
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Notes
+
+- If Gemini fails, the app can fall back to mock responses/plan generation in some flows.
+- If MongoDB connection fails, verify Atlas IP access, user permissions, and connection string format.
