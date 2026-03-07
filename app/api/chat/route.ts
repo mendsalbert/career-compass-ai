@@ -1,11 +1,12 @@
 import { GoogleGenAI } from "@google/genai";
 import { NextResponse } from "next/server";
 
-// The client gets the API key from the environment variable `GEMINI_API_KEY`
-const ai = new GoogleGenAI({});
+export const dynamic = "force-dynamic";
+
 const CHAT_MODELS = ["gemini-3-flash-preview", "gemini-2.5-flash"] as const;
 
 export async function POST(request: Request) {
+  const ai = new GoogleGenAI({});
   try {
     const { profile, plan, selectedMonthId, messages } = await request.json();
 

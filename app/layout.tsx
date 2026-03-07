@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import type { Metadata } from "next";
 import {
   ClerkProvider,
@@ -29,7 +31,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
+    <ClerkProvider publishableKey="pk_test_YXB0LWdvb3NlLTYuY2xlcmsuYWNjb3VudHMuZGV2JA">
       <html lang="en">
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}

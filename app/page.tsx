@@ -182,6 +182,7 @@ export default function Home() {
     return state.plan.months.find((m) => m.id === id) ?? null;
   }, [state.plan, state.selectedMonthId]);
 
+
   useEffect(() => {
     if (!userId) {
       hasCompletedRemoteRestoreRef.current = false;
@@ -232,11 +233,9 @@ export default function Home() {
           {
             id: `plan-generated-${Date.now()}`,
             from: "jake",
-            content: `Nice work, ${
-              profile.name || "there"
-            }! I've mapped out a 12‑month path toward ${
-              profile.desiredRole || "your next step"
-            }. Let's focus on Month 1 first so it feels manageable.`,
+            content: `Nice work, ${profile.name || "there"
+              }! I've mapped out a 12‑month path toward ${profile.desiredRole || "your next step"
+              }. Let's focus on Month 1 first so it feels manageable.`,
             timestamp: Date.now(),
           },
         ],
@@ -255,11 +254,9 @@ export default function Home() {
           {
             id: `plan-generated-${Date.now()}`,
             from: "jake",
-            content: `Nice work, ${
-              profile.name || "there"
-            }! I've mapped out a 12‑month path toward ${
-              profile.desiredRole || "your next step"
-            }. Let's focus on Month 1 first so it feels manageable.`,
+            content: `Nice work, ${profile.name || "there"
+              }! I've mapped out a 12‑month path toward ${profile.desiredRole || "your next step"
+              }. Let's focus on Month 1 first so it feels manageable.`,
             timestamp: Date.now(),
           },
         ],
@@ -269,6 +266,8 @@ export default function Home() {
     }
   };
 
+
+
   const updateTaskStatus = (monthId: string, taskId: string, status: TaskStatus) => {
     if (!state.plan) return;
     setState((prev) => {
@@ -277,11 +276,11 @@ export default function Home() {
         month.id !== monthId
           ? month
           : {
-              ...month,
-              tasks: month.tasks.map((task) =>
-                task.id === taskId ? { ...task, status } : task
-              ),
-            }
+            ...month,
+            tasks: month.tasks.map((task) =>
+              task.id === taskId ? { ...task, status } : task
+            ),
+          }
       );
       return {
         ...prev,

@@ -3,6 +3,7 @@ import { auth } from "@clerk/nextjs/server";
 import { getDb } from "@/lib/mongodb";
 
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 type PersistedState = {
   stage: "onboarding" | "plan";
